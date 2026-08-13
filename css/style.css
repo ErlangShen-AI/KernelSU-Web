@@ -1,4 +1,5 @@
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button:focus,button:focus-visible{outline:none}
 :root{--p:#0061a4;--op:#fff;--pc:#d1e4ff;--opc:#001d36;--sc:#d7e3f7;--osc:#101c2b;--tc:#f2dafe;--otc:#251431;--e:#ba1a1a;--oe:#fff;--ec:#ffdad6;--oec:#410002;--sf:#fdfcff;--osf:#1a1c1e;--osv:#43474e;--scl:#f7f6fb;--scm:#f1f0f5;--sch:#ebebf0;--sh:#e5e5ea;--sb:#fdfcff;--ol:#73777f;--olv:#c3c6cf;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC','PingFang SC',sans-serif}
 [data-theme=dark]{--p:#9ecaff;--op:#003258;--pc:#00497d;--opc:#d1e4ff;--sc:#3b4858;--osc:#d7e3f7;--tc:#523f5f;--otc:#f2dafe;--e:#ffb4ab;--oe:#690005;--ec:#93000a;--oec:#ffdad6;--sf:#1a1c1e;--osf:#e2e2e6;--osv:#c3c6cf;--scl:#1d1e21;--scm:#212225;--sch:#2b2d30;--sh:#36383b;--sb:#3b3d40;--ol:#8d9199;--olv:#43474e}
 html,body{height:100%}
