@@ -20,8 +20,12 @@
 
 ```
 KernelSU-Web/
-├── index.html
-├── css/style.css
-├── js/app.js
+├── index.html        页面结构，交互全部走 data-action 事件委托
+├── css/style.css     设计令牌 + 组件样式，尺寸自适应各类屏幕
+├── js/data.js        设备信息探测与内置数据
+├── js/ui.js          弹窗 / 对话框 / 提示 / 列表行等通用 UI
+├── js/app.js         状态、渲染与交互分发
 └── img/yuanshen.png
 ```
+
+三个脚本用普通 `<script>` 顺序加载，直接用浏览器打开 index.html 即可，不需要构建。

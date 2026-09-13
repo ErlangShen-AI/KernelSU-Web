@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>KernelSU</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,115 +11,117 @@
 </head>
 <body>
 
-<div class="app">
-  <div class="mn">
+<div class="app-shell">
+  <div class="app-main">
 
-    <div class="pg a" id="p0">
-      <div class="tb"><h1>KernelSU</h1><div class="ta"><button onclick="reboot()"><span class="ms">sync</span></button></div></div>
-      <div id="h0"></div>
+    <div class="tab-page is-active" id="page-home">
+      <div class="top-bar"><h1 class="top-bar-title">KernelSU</h1><div class="top-bar-actions"><button class="icon-button" data-action="open-reboot-menu" aria-label="重启"><span class="icon">sync</span></button></div></div>
+      <div id="home-content"></div>
     </div>
 
-    <div class="pg su" id="p1">
-      <div class="tb2">
-        <button onclick="openPage('sulog')"><span class="ms">article</span></button>
-        <span class="st">超级用户</span>
-        <button onclick="suSort()"><span class="ms">sort</span></button>
-        <button onclick="suMore()"><span class="ms">more_vert</span></button>
+    <div class="tab-page tab-page--superuser" id="page-superuser">
+      <div class="top-bar top-bar--compact">
+        <button class="icon-button" data-action="open-page" data-page="su-log" aria-label="SU 日志"><span class="icon">article</span></button>
+        <span class="top-bar-title">超级用户</span>
+        <button class="icon-button" data-action="open-superuser-sort" aria-label="排序"><span class="icon">sort</span></button>
+        <button class="icon-button" data-action="open-superuser-filter" aria-label="筛选"><span class="icon">more_vert</span></button>
       </div>
-      <div class="srch"><span class="ms">search</span><input id="sui" placeholder="搜索应用…"></div>
-      <div class="us" id="us"></div>
+      <div class="search-field"><span class="icon">search</span><input id="superuser-search" placeholder="搜索应用…"></div>
+      <div class="superuser-list" id="superuser-list"></div>
     </div>
 
-    <div class="pg" id="p2">
-      <div class="tb"><h1>模块</h1><div class="ta"><button onclick="openPage('modrepo')"><span class="ms">cloud</span></button><button onclick="modSort()"><span class="ms">more_vert</span></button></div></div>
-      <div id="h2"></div>
+    <div class="tab-page" id="page-modules">
+      <div class="top-bar"><h1 class="top-bar-title">模块</h1><div class="top-bar-actions"><button class="icon-button" data-action="open-page" data-page="module-repository" aria-label="模块仓库"><span class="icon">cloud</span></button><button class="icon-button" data-action="open-module-sort" aria-label="排序"><span class="icon">more_vert</span></button></div></div>
+      <div id="module-list"></div>
     </div>
 
-    <div class="pg" id="p3">
-      <div class="tb"><h1>设置</h1></div>
-      <div id="h3"></div>
+    <div class="tab-page" id="page-settings">
+      <div class="top-bar"><h1 class="top-bar-title">设置</h1></div>
+      <div id="settings-content"></div>
     </div>
 
-    <div class="spg" id="sa">
-      <div class="tb"><button class="bk" onclick="goback()"><span class="ms">arrow_back</span></button><h1>关于</h1></div>
-      <div class="sp-body">
-        <div class="about-top">
-          <div class="about-icon"><svg viewBox="0 0 108 108" width="56" height="56"><rect x="28" y="28" width="26" height="26" rx="2" fill="var(--p)"/><rect x="54" y="54" width="26" height="26" rx="2" fill="var(--p)"/></svg></div>
+    <div class="sub-page" id="page-about">
+      <div class="top-bar"><button class="back-button" data-action="go-back" aria-label="返回"><span class="icon">arrow_back</span></button><h1 class="top-bar-title">关于</h1></div>
+      <div class="sub-page-body">
+        <div class="about-header">
+          <div class="about-logo"><svg viewBox="0 0 108 108" width="56" height="56"><rect x="28" y="28" width="26" height="26" rx="2" fill="var(--primary)"/><rect x="54" y="54" width="26" height="26" rx="2" fill="var(--primary)"/></svg></div>
           <div class="about-name">KernelSU</div>
-          <div class="about-ver" id="av">v1.0.0</div>
+          <div class="about-version" id="about-version">v1.0.0</div>
         </div>
-        <div class="sg">
-          <div class="si" onclick="window.open('https://github.com/tiann/KernelSU','_blank')"><span class="ms" style="color:var(--osv)">code</span><span>查看源码</span><span class="ms" style="margin-left:auto;color:var(--osv)">chevron_right</span></div>
-          <div class="si" onclick="window.open('https://t.me/KernelSU','_blank')"><span class="ms" style="color:var(--osv)">send</span><span>加入 Telegram</span><span class="ms" style="margin-left:auto;color:var(--osv)">chevron_right</span></div>
+        <div class="group">
+          <div class="setting-row" data-action="open-external" data-url="https://github.com/tiann/KernelSU"><span class="icon setting-icon">code</span><span>查看源码</span><span class="icon row-chevron--trailing">chevron_right</span></div>
+          <div class="setting-row" data-action="open-external" data-url="https://t.me/KernelSU"><span class="icon setting-icon">send</span><span>加入 Telegram</span><span class="icon row-chevron--trailing">chevron_right</span></div>
         </div>
-        <div class="about-device" id="ad"></div>
+        <div class="about-device" id="about-device"></div>
       </div>
     </div>
 
-    <div class="spg" id="sap">
-      <div class="tb"><button class="bk" onclick="goback()"><span class="ms">arrow_back</span></button><h1>App Profile</h1></div>
-      <div class="sp-body"><div id="aph"></div><div class="sg" id="apb"></div></div>
+    <div class="sub-page" id="page-app-profile">
+      <div class="top-bar"><button class="back-button" data-action="go-back" aria-label="返回"><span class="icon">arrow_back</span></button><h1 class="top-bar-title">App Profile</h1></div>
+      <div class="sub-page-body"><div id="profile-summary"></div><div class="group" id="profile-settings"></div></div>
     </div>
 
-    <div class="spg" id="ssulog">
-      <div class="tb"><button class="bk" onclick="goback()"><span class="ms">arrow_back</span></button><h1>SU 日志</h1></div>
-      <div class="sp-body">
-        <div class="sg">
-          <div class="si"><span class="ms" style="color:var(--p)">check_circle</span><div><b>授权 Root</b><br><span style="font-size:13px;color:var(--osv)">com.termoneplus</span></div></div>
-          <div class="si"><span class="ms" style="color:var(--p)">check_circle</span><div><b>授权 Root</b><br><span style="font-size:13px;color:var(--osv)">moe.shizuku</span></div></div>
-          <div class="si"><span class="ms" style="color:var(--e)">block</span><div><b>拒绝 Root</b><br><span style="font-size:13px;color:var(--osv)">com.unknown</span></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="spg" id="sinstall">
-      <div class="tb"><button class="bk" onclick="goback()"><span class="ms">arrow_back</span></button><h1>安装</h1></div>
-      <div class="sp-body">
-        <div class="sg">
-          <div class="si" onclick="toast('直接安装（推荐）')"><span class="ms" style="color:var(--osv)">system_update</span><span>直接安装（推荐）</span><span class="ms" style="margin-left:auto;color:var(--osv)">chevron_right</span></div>
-          <div class="si" onclick="toast('安装到未使用的槽位')"><span class="ms" style="color:var(--osv)">swap_horiz</span><span>安装到未使用的槽位（OTA 后）</span><span class="ms" style="margin-left:auto;color:var(--osv)">chevron_right</span></div>
-        </div>
-        <div class="sg" style="margin-top:12px">
-          <div class="si" onclick="document.getElementById('fp').click()"><span class="ms" style="color:var(--osv)">file_open</span><div><b>选择一个文件</b><br><span style="font-size:13px;color:var(--osv)">建议选择 boot 分区镜像</span></div><span class="ms" style="margin-left:auto;color:var(--osv)">chevron_right</span></div>
+    <div class="sub-page" id="page-su-log">
+      <div class="top-bar"><button class="back-button" data-action="go-back" aria-label="返回"><span class="icon">arrow_back</span></button><h1 class="top-bar-title">SU 日志</h1></div>
+      <div class="sub-page-body">
+        <div class="group">
+          <div class="setting-row"><span class="icon log-icon--granted">check_circle</span><div><b>授权 Root</b><br><span class="row-hint">com.termoneplus</span></div></div>
+          <div class="setting-row"><span class="icon log-icon--granted">check_circle</span><div><b>授权 Root</b><br><span class="row-hint">moe.shizuku</span></div></div>
+          <div class="setting-row"><span class="icon log-icon--denied">block</span><div><b>拒绝 Root</b><br><span class="row-hint">com.unknown</span></div></div>
         </div>
       </div>
     </div>
 
-    <div class="spg" id="smodrepo">
-      <div class="tb"><button class="bk" onclick="goback()"><span class="ms">arrow_back</span></button><h1>模块仓库</h1></div>
-      <div class="sp-body">
-        <div style="text-align:center;padding:60px 20px;color:var(--osv)">
-          <span class="ms" style="font-size:48px;opacity:.3;margin-bottom:12px;display:block">cloud_off</span>
-          <p style="font-size:16px">服务端异常 404</p>
-          <p style="font-size:13px;margin-top:4px;opacity:.7">无法连接到模块仓库服务器</p>
-          <button onclick="toast('重试连接…')" style="margin-top:16px;padding:8px 24px;border:none;border-radius:20px;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;background:var(--p);color:var(--op)">重试</button>
+    <div class="sub-page" id="page-install">
+      <div class="top-bar"><button class="back-button" data-action="go-back" aria-label="返回"><span class="icon">arrow_back</span></button><h1 class="top-bar-title">安装</h1></div>
+      <div class="sub-page-body">
+        <div class="group">
+          <div class="setting-row" data-action="toast" data-message="直接安装（推荐）"><span class="icon setting-icon">system_update</span><span>直接安装（推荐）</span><span class="icon row-chevron--trailing">chevron_right</span></div>
+          <div class="setting-row" data-action="toast" data-message="安装到未使用的槽位"><span class="icon setting-icon">swap_horiz</span><span>安装到未使用的槽位（OTA 后）</span><span class="icon row-chevron--trailing">chevron_right</span></div>
+        </div>
+        <div class="group group--spaced">
+          <div class="setting-row" data-action="pick-module-file"><span class="icon setting-icon">file_open</span><div><b>选择一个文件</b><br><span class="row-hint">建议选择 boot 分区镜像</span></div><span class="icon row-chevron--trailing">chevron_right</span></div>
         </div>
       </div>
     </div>
 
-    <div class="spg" id="srd">
-      <div class="tb"><button class="bk" onclick="goback()"><span class="ms">arrow_back</span></button><h1 id="rdt">详情</h1></div>
-      <div class="sp-body" id="rdb"></div>
+    <div class="sub-page" id="page-module-repository">
+      <div class="top-bar"><button class="back-button" data-action="go-back" aria-label="返回"><span class="icon">arrow_back</span></button><h1 class="top-bar-title">模块仓库</h1></div>
+      <div class="sub-page-body">
+        <div class="empty-state">
+          <span class="icon empty-state-icon">cloud_off</span>
+          <p class="empty-state-title">服务端异常 404</p>
+          <p class="empty-state-text">无法连接到模块仓库服务器</p>
+          <button class="pill-button" data-action="toast" data-message="重试连接…">重试</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-page" id="page-module-detail">
+      <div class="top-bar"><button class="back-button" data-action="go-back" aria-label="返回"><span class="icon">arrow_back</span></button><h1 class="top-bar-title" id="module-detail-title">详情</h1></div>
+      <div class="sub-page-body" id="module-detail-body"></div>
     </div>
 
   </div>
 
-  <div class="bt">
-    <button class="ni a" data-i="0"><span class="ms f">home</span><span class="nl">主页</span></button>
-    <button class="ni" data-i="1"><span class="ms">shield</span><span class="nl">超级用户</span></button>
-    <button class="ni" data-i="2"><span class="ms">extension</span><span class="nb h" id="mb">3</span><span class="nl">模块</span></button>
-    <button class="ni" data-i="3"><span class="ms">settings</span><span class="nl">设置</span></button>
+  <div class="bottom-nav">
+    <button class="nav-item is-active" data-action="switch-tab" data-index="0" aria-label="主页"><span class="icon is-filled">home</span><span class="nav-label">主页</span></button>
+    <button class="nav-item" data-action="switch-tab" data-index="1" aria-label="超级用户"><span class="icon">shield</span><span class="nav-label">超级用户</span></button>
+    <button class="nav-item" data-action="switch-tab" data-index="2" aria-label="模块"><span class="icon">extension</span><span class="nav-badge is-hidden" id="module-badge">3</span><span class="nav-label">模块</span></button>
+    <button class="nav-item" data-action="switch-tab" data-index="3" aria-label="设置"><span class="icon">settings</span><span class="nav-label">设置</span></button>
   </div>
 </div>
 
-<div class="ov" id="ov" onclick="if(event.target===this)cpp()"><div class="pp" id="pp"></div></div>
-<div class="dv" id="dv" onclick="if(event.target===this)cd()"><div class="di" id="di"></div></div>
-<div class="tt" id="tt"></div>
+<div class="popup-overlay" id="popup-overlay" data-action="close-popup-on-self"><div class="popup" id="popup"></div></div>
+<div class="dialog-overlay" id="dialog-overlay" data-action="close-dialog-on-self"><div class="dialog" id="dialog"></div></div>
+<div class="toast" id="toast"></div>
 
-<input type="file" id="fp" accept=".zip,application/zip" multiple style="display:none">
+<input type="file" id="module-file-input" class="is-hidden" accept=".zip,application/zip" multiple>
 
-<div class="fab" onclick="document.getElementById('fp').click()"><span class="ms" style="color:var(--op)">add</span></div>
+<div class="fab" id="fab" data-action="pick-module-file" aria-label="安装模块"><span class="icon">add</span></div>
 
-<script src="js/app.js?v=6"></script>
+<script src="js/data.js?v=7"></script>
+<script src="js/ui.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
 </body>
 </html>
